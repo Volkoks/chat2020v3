@@ -1,0 +1,23 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ListView?>
+<VBox fx:controller="client.RegController"
+      xmlns:fx="http://javafx.com/fxml" alignment="center">
+
+    <Label text="login"/>
+    <TextField fx:id="loginField"/>
+    <Label text="password"/>
+    <PasswordField fx:id="passwordField"/>
+    <Label text="nickname"/>
+    <TextField fx:id="nickField"/>
+    <Button text="Зарегистирироваться" onAction="#clickOk"/>
+
+</VBox>
