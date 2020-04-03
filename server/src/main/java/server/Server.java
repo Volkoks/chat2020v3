@@ -8,8 +8,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 public class Server {
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
+
     private Vector<ClientHandler> clients;
     private AuthService authService;
 
@@ -21,6 +24,7 @@ public class Server {
         clients = new Vector<>();
 //        authService = new SimpleAuthService();
         if (!SQLHandler.connect()) {
+            logger.warning("Не удалось подключиться к БД");
             throw new RuntimeException("Не удалось подключиться к БД");
         }
         authService = new DBAuthServise();
@@ -30,16 +34,19 @@ public class Server {
 
         try {
             server = new ServerSocket(8189);
-            System.out.println("Сервер запустился");
+//            System.out.println("Сервер запустился");
+            logger.info("Сервер запустился");
 
             while (true) {
                 socket = server.accept();
-                System.out.println("Клиент подключился");
+//                System.out.println("Клиент подключился");
+                logger.info("Клиент подключился");
                 new ClientHandler(socket, this);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.throwing("Server", "close", e);
         } finally {
             SQLHandler.disconnect();
             try {
